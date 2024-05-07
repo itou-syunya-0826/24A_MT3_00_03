@@ -36,8 +36,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Vector3 translate{ 4.1f,2.6f,0.8f };
 	Vector3 scale{ 1.5f,5.2f,7.3f };
-	Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
-	Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+	Matrix4x4 translateMatrix = Matrix::MakeTranslateMatrix(translate);
+	Matrix4x4 scaleMatrix = Matrix::MakeScaleMatrix(scale);
 	Vector3 point{ 2.3f,3.8f,1.4f };
 	Matrix4x4 transformMatrix = {
 		1.0f,2.0f,3.0f,4.0f,
@@ -45,11 +45,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		1.0f,4.0f,2.0f,3.0f,
 		2.0f,2.0f,1.0f,3.0f
 	};
-	Vector3 transformed = Transform(point, transformMatrix);
+	Vector3 transformed = Matrix::Transform(point, transformMatrix);
 
-	VectorScreenPrintf(0, 0, transformed, "transformed");
-	MatrixScreenPrintf(0, 0, translateMatrix, "translateMatrix");
-	MatrixScreenPrintf(0, kRowHeight * 5, scaleMatrix, "scaleMatrix");
+	
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -71,7 +69,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
-
+		VectorScreenPrintf(0, 0, transformed, "transformed");
+		MatrixScreenPrintf(0, 20, translateMatrix, "translateMatrix");
+		MatrixScreenPrintf(0, kRowHeight * 5+20, scaleMatrix, "scaleMatrix");
 		///
 		/// ↑描画処理ここまで
 		///
